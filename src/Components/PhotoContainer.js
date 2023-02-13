@@ -1,11 +1,25 @@
 import React from "react";
-import Photos from "./Photos";
+import Photo from "./Photo";
+import NotFound from "./NotFound";
 
-const PhotoContainer = () => {
-    <div class="photo-container">
-        <h2>Results</h2>
-        <Photos />
-    </div>
+
+const PhotoContainer = (props) => {
+    // const results = props.data;
+    // let photos;
+    // if (results.length > 0) {
+    //     photos = results.map(photo => <Photo />);
+    // } else {
+    //     photos = <NotFound />
+    // }
+
+    return (
+        <div className="photo-container">
+            <h2>Results</h2>
+            <ul>
+                {/* {photos} */}
+            </ul>
+        </div>
+    );
 }
 
 export default PhotoContainer;
