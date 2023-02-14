@@ -19,7 +19,7 @@ const PhotoContainer = (props) => {
                 {/* {photos} */}
             </ul>
         </div>
-    );
+    ); 
 }
 
 export default PhotoContainer;

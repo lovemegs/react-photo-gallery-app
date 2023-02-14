@@ -13,15 +13,19 @@ import Nav from "./Components/Nav";
 
 const App = (props) => {
   const [photos, setPhotos] = useState([]);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("dogs");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     let activeFetch = true;
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&tags=${query}&api_key=${apiKey}`)
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&tags=dogs&api_key=${apiKey}&format=json&nojsoncallback=1`)
       .then(response => {
         // handle success
         if (activeFetch) {
-          setPhotos(response.data.data);
+          console.log(response);
+          setPhotos(response.data.photos.photo);
+          setLoading(false);
         } 
       })
       .catch(error => {
@@ -37,10 +41,16 @@ const App = (props) => {
 
   return (
     <div className="container">
-      <h1>Hello</h1>
 
       <SearchForm changeQuery={handleQueryChange} />
       <Nav />
+
+      {
+        (loading)
+        ? <p>Loading...</p>
+        : <PhotoContainer data={photos} />
+      }
+
       <Routes>
         <Route path="/" element={<PhotoContainer />} />
         <Route path="photos" element={<Photo data={photos} />} />
