@@ -1,6 +1,6 @@
 import React from "react";
 
-
+// Handles individual photo
 const Photo = (props) => {
     return (
         <li>

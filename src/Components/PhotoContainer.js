@@ -1,9 +1,9 @@
 import React from "react";
 import Photo from "./Photo";
+// Components
 import NotFound from "./NotFound";
 
-
-
+// Maps over the array of photos from flickr
 const PhotoContainer = ({data}) => {
     const results = data;
     let photos;
@@ -13,6 +13,7 @@ const PhotoContainer = ({data}) => {
         photos = <NotFound />
     }
 
+    // Returns the list of photos
     return (
         <div className="photo-container">
             <h2>Results</h2>

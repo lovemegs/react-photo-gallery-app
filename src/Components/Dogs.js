@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import apiKey from "../config";
 
+// Components
 import PhotoContainer from "./PhotoContainer";
-
-
 
 const Dogs = () => {
     const [photos, setPhotos] = useState([]);
     const [query, setQuery] = useState("dogs");
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
+    // Fetches 24 photos from flickr that match the query
     useEffect(() => {
-        // setLoading(true);
+        setLoading(true);
         let activeFetch = true;
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&tags=${query}&per_page=24&api_key=${apiKey}&format=json&nojsoncallback=1`)
             .then(response => {
@@ -20,7 +20,7 @@ const Dogs = () => {
                 if (activeFetch) {
                     console.log(response);
                     setPhotos(response.data.photos.photo);
-                    // setLoading(false);
+                    setLoading(false);
                 }
             })
             .catch(error => {
@@ -32,7 +32,8 @@ const Dogs = () => {
 
     return (
         <div className="photo-container">
-            <PhotoContainer data={photos}/>
+            {/* Adds a loading message before the images load */}
+            {(loading)?<p>Loading...</p>:<PhotoContainer data={photos} />}
         </div>
     )
 }

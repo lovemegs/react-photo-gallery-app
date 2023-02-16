@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+// Handles the search feature and returns the results of that search
 const SearchForm = (props) => {
     const [searchText, setSearchText] = useState('');
 
@@ -11,7 +12,7 @@ const SearchForm = (props) => {
 
     return (
         <form className="search-form" onSubmit={e => handleSubmit(e)} >
-            <input  type="search"
+            <input type="search"
                     onChange={e => setSearchText(e.target.value)}
                     name="search"
                     placeholder="Search"
