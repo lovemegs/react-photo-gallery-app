@@ -5,27 +5,28 @@ import apiKey from "./config";
 
 // App Components
 import PhotoContainer from "./Components/PhotoContainer";
-import Photo from "./Components/Photo";
-import NotFound from "./Components/NotFound";
 import SearchForm from "./Components/SearchForm";
 import Nav from "./Components/Nav";
+import Dogs from "./Components/Dogs";
+import Rainbows from "./Components/Rainbows";
+import Flowers from "./Components/Flowers";
 
 
 const App = (props) => {
   const [photos, setPhotos] = useState([]);
-  const [query, setQuery] = useState("dogs");
-  const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("zoo animals");
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     let activeFetch = true;
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&tags=dogs&api_key=${apiKey}&format=json&nojsoncallback=1`)
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&tags=${query}&per_page=24&api_key=${apiKey}&format=json&nojsoncallback=1`)
       .then(response => {
         // handle success
         if (activeFetch) {
           console.log(response);
           setPhotos(response.data.photos.photo);
-          setLoading(false);
+          // setLoading(false);
         } 
       })
       .catch(error => {
@@ -45,16 +46,11 @@ const App = (props) => {
       <SearchForm changeQuery={handleQueryChange} />
       <Nav />
 
-      {
-        (loading)
-        ? <p>Loading...</p>
-        : <PhotoContainer data={photos} />
-      }
-
       <Routes>
-        <Route path="/" element={<PhotoContainer />} />
-        <Route path="photos" element={<Photo data={photos} />} />
-        <Route path="notFound" element={<NotFound />} />
+        <Route path="/" element={<PhotoContainer data={photos}/>} />
+        <Route path="/dogs" element={<Dogs />} />
+        <Route path="/flowers" element={<Flowers />} />
+        <Route path="/rainbows" element={<Rainbows />} />
       </Routes>
     </div>
   );
