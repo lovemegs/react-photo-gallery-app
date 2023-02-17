@@ -7,14 +7,13 @@ import PhotoContainer from "./PhotoContainer";
 
 const Rainbows = () => {
     const [photos, setPhotos] = useState([]);
-    const [query, setQuery] = useState("rainbows");
     const [loading, setLoading] = useState(true);
 
     // Fetches 24 photos from flickr that match the query
     useEffect(() => {
         setLoading(true);
         let activeFetch = true;
-        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&tags=${query}&per_page=24&api_key=${apiKey}&format=json&nojsoncallback=1`)
+        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&tags="rainbows"&per_page=24&api_key=${apiKey}&format=json&nojsoncallback=1`)
             .then(response => {
                 // handle success
                 if (activeFetch) {
@@ -28,7 +27,7 @@ const Rainbows = () => {
                 console.log("Error fetching and parsing data", error);
             });
         return () => { activeFetch = false }
-    }, [query]);
+    }, []);
 
     return (
         <div className="photo-container">
